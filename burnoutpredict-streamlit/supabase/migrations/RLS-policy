@@ -1,0 +1,38 @@
+-- ============================================
+-- ADD DELETE POLICIES FOR EMPLOYEES AND HR
+-- ============================================
+
+-- Allow employees to delete their own survey responses
+DROP POLICY IF EXISTS "Employees can delete own responses" ON public.survey_responses;
+CREATE POLICY "Employees can delete own responses" ON public.survey_responses
+    FOR DELETE USING (auth.uid() = user_id);
+
+-- Allow employees to delete their own risk scores
+DROP POLICY IF EXISTS "Employees can delete own risk scores" ON public.risk_scores;
+CREATE POLICY "Employees can delete own risk scores" ON public.risk_scores
+    FOR DELETE USING (auth.uid() = user_id);
+
+-- Allow employees to delete their own custom survey responses
+DROP POLICY IF EXISTS "Employees can delete own custom responses" ON public.custom_survey_responses;
+CREATE POLICY "Employees can delete own custom responses" ON public.custom_survey_responses
+    FOR DELETE USING (auth.uid() = user_id);
+
+-- Allow HR to delete any custom survey responses
+DROP POLICY IF EXISTS "HR can delete any custom responses" ON public.custom_survey_responses;
+CREATE POLICY "HR can delete any custom responses" ON public.custom_survey_responses
+    FOR DELETE USING (public.has_role(auth.uid(), 'hr'));
+
+-- Allow HR to delete any survey responses
+DROP POLICY IF EXISTS "HR can delete any survey responses" ON public.survey_responses;
+CREATE POLICY "HR can delete any survey responses" ON public.survey_responses
+    FOR DELETE USING (public.has_role(auth.uid(), 'hr'));
+
+-- Allow HR to delete any risk scores
+DROP POLICY IF EXISTS "HR can delete any risk scores" ON public.risk_scores;
+CREATE POLICY "HR can delete any risk scores" ON public.risk_scores
+    FOR DELETE USING (public.has_role(auth.uid(), 'hr'));
+
+-- Verify policies
+SELECT tablename, policyname, permissive, cmd
+FROM pg_policies 
+WHERE tablename IN ('survey_responses', 'risk_scores', 'custom_survey_responses');

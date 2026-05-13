@@ -1,0 +1,9 @@
+.env
+__pycache__/
+*.pyc
+.venv/
+venv/
+.DS_Store
+burnoutpredict/ml/*.pkl
+burnoutpredict/ml/*.json
+.streamlit/secrets.toml

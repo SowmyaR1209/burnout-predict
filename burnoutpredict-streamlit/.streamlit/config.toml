@@ -1,0 +1,14 @@
+# BurnoutPredict — Calm Clinical theme (mirrors the original web app).
+[theme]
+primaryColor = "#1B8E8B"
+backgroundColor = "#F7FBFB"
+secondaryBackgroundColor = "#FFFFFF"
+textColor = "#15262C"
+font = "sans serif"
+
+[server]
+headless = true
+runOnSave = true
+
+[browser]
+gatherUsageStats = false

@@ -1,0 +1,1 @@
+"""BurnoutPredict — Streamlit edition."""
