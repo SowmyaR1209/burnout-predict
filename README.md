@@ -47,7 +47,6 @@ sentiment analysis of free-text survey notes. Backend is **Supabase** (Postgres
    ```bash
    streamlit run app.py
    ```
-   The app opens at <http://localhost:8501>.
 
 ## First run notes
 
